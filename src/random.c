@@ -99,14 +99,14 @@ static mrb_value mrb_random_init(mrb_state *mrb, mrb_value self)
   return self;
 }
 
-void mrb_mruby_random_vs2010_gem_init(mrb_state *mrb)
+void mrb_mruby_vs2010_random_gem_init(mrb_state *mrb)
 {
   struct RClass *random;
 
   mrb_define_method(mrb, mrb->kernel_module, "rand", mrb_random_g_rand, ARGS_OPT(1));
   mrb_define_method(mrb, mrb->kernel_module, "srand", mrb_random_g_srand, ARGS_OPT(1));
 
-  random = mrb_define_class(mrb, "Random", mrb->object_class);
+  random = mrb_define_class(mrb, "Vs2010Random", mrb->object_class);
   mrb_define_class_method(mrb, random, "rand", mrb_random_g_rand, ARGS_OPT(1));
   mrb_define_class_method(mrb, random, "srand", mrb_random_g_srand, ARGS_OPT(1));
 
@@ -115,6 +115,6 @@ void mrb_mruby_random_vs2010_gem_init(mrb_state *mrb)
   mrb_define_method(mrb, random, "srand", mrb_random_srand, ARGS_OPT(1));
 }
 
-void mrb_mruby_random_vs2010_gem_final(mrb_state *mrb)
+void mrb_mruby_vs2010_random_gem_final(mrb_state *mrb)
 {
 }
