@@ -49,9 +49,9 @@ static mrb_value mrb_rand(mrb_state* mrb, mrb_value self)
     mrb_iv_set(mrb, self, mrb_intern(mrb, INSTANCE_RAND_SEED_KEY), mrb_fixnum_value(i));
   }
   if (mrb_nil_p(max) || mrb_fixnum(max) == 0) {
-    return mrb_float_value(NEXT_RAND(i) / 32767.0);
+    return mrb_float_value(mrb, NEXT_RAND(i) / 32767.0);
   }
-  return mrb_float_value(NEXT_RAND(i) % mrb_fixnum(max));
+  return mrb_float_value(mrb, NEXT_RAND(i) % mrb_fixnum(max));
 }
 
 static mrb_value mrb_srand(mrb_state* mrb, mrb_value self)
