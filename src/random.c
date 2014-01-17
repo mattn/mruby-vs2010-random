@@ -40,13 +40,13 @@ static mrb_value mrb_rand(mrb_state* mrb, mrb_value self)
 
   max = get_opt(mrb);
   if (mrb_nil_p(self)) {
-    seed = mrb_gv_get(mrb, mrb_intern(mrb, GLOBAL_RAND_SEED_KEY));
+    seed = mrb_gv_get(mrb, mrb_intern_lit(mrb, GLOBAL_RAND_SEED_KEY));
     i = NEXT_SEED(seed);
-    mrb_gv_set(mrb, mrb_intern(mrb, GLOBAL_RAND_SEED_KEY), mrb_fixnum_value(i));
+    mrb_gv_set(mrb, mrb_intern_lit(mrb, GLOBAL_RAND_SEED_KEY), mrb_fixnum_value(i));
   } else {
-    seed = mrb_iv_get(mrb, self, mrb_intern(mrb, INSTANCE_RAND_SEED_KEY));
+    seed = mrb_iv_get(mrb, self, mrb_intern_lit(mrb, INSTANCE_RAND_SEED_KEY));
     i = NEXT_SEED(seed);
-    mrb_iv_set(mrb, self, mrb_intern(mrb, INSTANCE_RAND_SEED_KEY), mrb_fixnum_value(i));
+    mrb_iv_set(mrb, self, mrb_intern_lit(mrb, INSTANCE_RAND_SEED_KEY), mrb_fixnum_value(i));
   }
   if (mrb_nil_p(max) || mrb_fixnum(max) == 0) {
     return mrb_float_value(mrb, NEXT_RAND(i) / 32767.0);
@@ -64,11 +64,11 @@ static mrb_value mrb_srand(mrb_state* mrb, mrb_value self)
     seed = mrb_fixnum_value(0); /* TODO */
   }
   if (mrb_nil_p(self)) {
-    old_seed = mrb_gv_get(mrb, mrb_intern(mrb, GLOBAL_RAND_SEED_KEY));
-    mrb_gv_set(mrb, mrb_intern(mrb, GLOBAL_RAND_SEED_KEY), seed);
+    old_seed = mrb_gv_get(mrb, mrb_intern_lit(mrb, GLOBAL_RAND_SEED_KEY));
+    mrb_gv_set(mrb, mrb_intern_lit(mrb, GLOBAL_RAND_SEED_KEY), seed);
   } else {
-    old_seed = mrb_iv_get(mrb, self, mrb_intern(mrb, INSTANCE_RAND_SEED_KEY));
-    mrb_iv_set(mrb, self, mrb_intern(mrb, INSTANCE_RAND_SEED_KEY), seed);
+    old_seed = mrb_iv_get(mrb, self, mrb_intern_lit(mrb, INSTANCE_RAND_SEED_KEY));
+    mrb_iv_set(mrb, self, mrb_intern_lit(mrb, INSTANCE_RAND_SEED_KEY), seed);
   }
   return old_seed;
 }
